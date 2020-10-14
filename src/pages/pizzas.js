@@ -7,7 +7,6 @@ export default function PizzasPage({
     pizzas: { nodes },
   },
 }) {
-  console.log(nodes);
   return (
     <>
       <PizzaList pizzas={nodes} />
