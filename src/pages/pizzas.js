@@ -1,6 +1,7 @@
 import { graphql } from 'gatsby';
 import React from 'react';
 import PizzaList from '../components/PizzaList';
+import ToppingsFilter from '../components/ToppingsFilter';
 
 export default function PizzasPage({
   data: {
@@ -9,13 +10,14 @@ export default function PizzasPage({
 }) {
   return (
     <>
+      <ToppingsFilter />
       <PizzaList pizzas={nodes} />
     </>
   );
 }
 
 export const query = graphql`
-  query MyQuery {
+  query PizzasQuery {
     pizzas: allSanityPizza {
       nodes {
         id
