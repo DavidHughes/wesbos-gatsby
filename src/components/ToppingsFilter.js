@@ -50,7 +50,7 @@ function countPizzasUsingTopping(pizzas) {
   return sortedCounts;
 }
 
-export default function ToppingsFilter({ chosenTopping }) {
+export default function ToppingsFilter({ activeTopping }) {
   // Get a list of all toppings
   // Get all pizzas & their toppings
   const { pizzas } = useStaticQuery(graphql`
@@ -74,7 +74,7 @@ export default function ToppingsFilter({ chosenTopping }) {
     <ToppingsStyles>
       {toppingsWithCounts.map((topping) => (
         <Link
-          className={topping.id === chosenTopping.id ? 'active' : null}
+          className={topping.id === activeTopping.id ? 'active' : null}
           key={topping.id}
           to={`/topping/${topping.name}`}
         >

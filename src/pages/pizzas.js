@@ -5,20 +5,23 @@ import ToppingsFilter from '../components/ToppingsFilter';
 
 export default function PizzasPage({
   data: {
-    pizzas: { nodes },
+    pizzas: { nodes: pizzas },
   },
+  pageContext: topping,
 }) {
   return (
     <>
-      <ToppingsFilter />
-      <PizzaList pizzas={nodes} />
+      <ToppingsFilter activeTopping={topping} />
+      <PizzaList pizzas={pizzas} />
     </>
   );
 }
 
 export const query = graphql`
-  query PizzasQuery {
-    pizzas: allSanityPizza {
+  query PizzasQuery($id: String) {
+    pizzas: allSanityPizza(
+      filter: { toppings: { elemMatch: { id: { eq: $id } } } }
+    ) {
       nodes {
         id
         name
