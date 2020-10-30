@@ -1,5 +1,6 @@
 import path from 'path';
 import fetch from 'isomorphic-fetch';
+import React from 'react';
 
 async function turnPizzasIntoPages({ graphql, actions }) {
   // Get a template for the page
@@ -107,19 +108,23 @@ async function turnSlicemastersIntoPages({ graphql, actions }) {
       }
     }
   `);
+  const slicemasterTemplate = path.resolve('./src/templates/Slicemaster.js');
+  data.slicemasters.nodes.forEach((slicemaster) => {
+    actions.createPage({
+      path: `/slicemaster/${slicemaster.slug.current}`,
+      component: slicemasterTemplate,
+      context: {
+        slug: slicemaster.slug.current,
+      },
+    });
+  });
 
-  // TODO: turn each slicemaster into their own page
   // Figure out how many pages there are based on how many slicemasters there are vs how many per page.
   const pageSize = parseInt(process.env.GATSBY_PAGE_SIZE);
   const pageCount = Math.ceil(data.slicemasters.totalCount / pageSize);
-  console.log('Page base', pageBase);
-  console.log('Page size', pageSize);
-  console.log('pageCount:', pageCount);
-  console.log('Slicemasters count:', data.slicemasters.totalCount);
 
   // Loop from 1 to N and create the listings pages for them
   Array.from({ length: pageCount }).forEach((_, i) => {
-    console.log(`Creating Slicemaster page #${i}`);
     actions.createPage({
       path: `/slicemasters/${i + 1}`,
       component: path.resolve('src/pages/slicemasters.js'),
