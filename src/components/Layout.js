@@ -6,6 +6,7 @@ import 'normalize.css';
 import GlobalStyles from '../styles/GlobalStyles';
 import Typography from '../styles/Typography';
 import stripes from '../assets/images/stripes.svg';
+import SEO from './SEO';
 
 const SiteBorderStyles = styled.div`
   max-width: 1000px;
