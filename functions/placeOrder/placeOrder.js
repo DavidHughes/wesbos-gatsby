@@ -18,9 +18,24 @@ function generateOrderEmail({ order, total }) {
   </div>`;
 }
 
+function wait(ms = 0) {
+  return new Promise((resolve, reject) => {
+    setTimeout(resolve, ms);
+  });
+}
+
 exports.handler = async (event, context) => {
   const body = JSON.parse(event.body);
-  console.log(body);
+
+  if (body.organic) {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({
+        message: `BEEP BOOP`,
+      }),
+    };
+  }
+
   const requiredFields = ['name', 'email', 'order'];
 
   for (const field of requiredFields) {
@@ -32,6 +47,15 @@ exports.handler = async (event, context) => {
         }),
       };
     }
+  }
+
+  if (!body.order.length) {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({
+        message: 'You must order at least one pizza',
+      }),
+    };
   }
 
   // create a transport for nodemailer

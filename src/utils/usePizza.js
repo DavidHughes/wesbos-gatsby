@@ -37,6 +37,7 @@ export default function usePizza({ pizzas, values }) {
       total: formatMoney(calculateOrderTotal(order, pizzas)),
       name: values.name,
       email: values.email,
+      organic: values.organic,
     };
 
     const res = await fetch(
