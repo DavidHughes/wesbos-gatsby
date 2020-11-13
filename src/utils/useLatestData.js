@@ -1,10 +1,29 @@
 import { useEffect, useState } from 'react';
 
+// All this and its usage below does is "fake"* to VSCode that it's a graphql query
+// and kick in the syntax highlighting/linting.
+// *not fake - real gql but without need for a library to process it.
+const gql = String.raw;
+
 export default function useLatestData() {
   const [hotSlices, setHotSlices] = useState();
   const [sliceMasters, setSliceMasters] = useState();
 
   useEffect(() => {
+    const details = `_id
+      name
+      slug {
+        current
+      }
+      image {
+        asset {
+          url
+          metadata {
+            lqip
+          }
+        }
+      }`;
+
     // when the component loads, fetch the data
     fetch(process.env.GATSBY_GRAPHQL_ENDPOINT, {
       method: 'POST',
@@ -12,21 +31,20 @@ export default function useLatestData() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        query: `query {
-          StoreSettings(id: "slicemasterHQ") {
-            name,
-            slicemasters {
-              name,
-              slug {
-                current
-              },
-              description
-            },
-            hotslices {
+        query: gql`
+          query {
+            StoreSettings(id: "slicemasterHQ") {
               name
-            },
+              slicemasters {
+                ${details}
+                description
+              }
+              hotslices {
+                ${details}
+              }
+            }
           }
-        }`,
+        `,
       }),
     })
       .then((res) => res.json())
@@ -38,7 +56,8 @@ export default function useLatestData() {
         console.log('Set hotSlices');
         setSliceMasters(res.data.StoreSettings.slicemasters);
         console.log('Set slicmasters');
-      });
+      })
+      .catch((err) => console.error('Fudge!', err));
   }, []);
 
   return {
