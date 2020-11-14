@@ -4,8 +4,8 @@ import { ItemsGrid, ItemStyles } from '../styles/Grids';
 export default function LoadingGrid({ count }) {
   return (
     <ItemsGrid>
-      {Array.from({ length: count || 4 }, () => (
-        <ItemStyles>
+      {Array.from({ length: count || 4 }, (_, i) => (
+        <ItemStyles key={i}>
           <p>
             <span className="mark">Loading!</span>
           </p>
