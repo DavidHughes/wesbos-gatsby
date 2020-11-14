@@ -10,6 +10,7 @@ function CurrentlySlicing({ sliceMasters }) {
       <h2 className="center">
         <span className="mark tilt">Currently slicing</span>
       </h2>
+      <p>These fine folks are ready to serve</p>
       {!sliceMasters && <LoadingGrid count={4} />}
       {sliceMasters && !sliceMasters?.length && (
         <p>No one is cookin' right now!</p>
@@ -24,6 +25,7 @@ function HotSlices({ hotSlices }) {
       <h2 className="center">
         <span className="mark tilt">Fresh from the oven</span>
       </h2>
+      <p>Just cooked, ready for eating</p>
       {!hotSlices && <LoadingGrid count={4} />}
       {hotSlices && !hotSlices?.length && (
         <p>Nothing's in the house quite yet, order ahead!</p>

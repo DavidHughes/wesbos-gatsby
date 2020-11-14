@@ -34,7 +34,6 @@ export default function Pagination({
   pageSize,
   totalCount,
   currentPage,
-  skip,
   base,
 }) {
   const totalPages = Math.ceil(totalCount / pageSize);

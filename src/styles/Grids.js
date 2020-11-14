@@ -3,7 +3,11 @@ import styled from 'styled-components';
 export const HomePageGrid = styled.div`
   display: grid;
   gap: 2em;
-  grid-template-columns: repeat(2, minmax(auto, 1fr));
+  --columns: 2;
+  grid-template-columns: repeat(var(--columns), minmax(auto, 1fr));
+  @media (max-width: 800px) {
+    --columns: 1;
+  }
 `;
 
 export const ItemsGrid = styled.div`
@@ -43,6 +47,8 @@ export const ItemStyles = styled.div`
   }
 
   p {
+    top: 0;
+    margin-top: 0;
     transform: rotate(-2deg) translateY(-50%);
     position: absolute;
     width: 100%;
