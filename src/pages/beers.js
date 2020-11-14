@@ -34,7 +34,6 @@ export default function BeersPage({ data }) {
         {data.beers.nodes.map((beer) => {
           const rating = Math.round(beer.rating.average);
 
-          console.log(beer);
           return (
             <SingleBeerStyles key={beer.id}>
               <img src={beer.image} alt={beer.name} />

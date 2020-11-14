@@ -49,13 +49,8 @@ export default function useLatestData() {
     })
       .then((res) => res.json())
       .then((res) => {
-        // check for errors
-        // set data to state
-        console.log('Fetched data', res.data.StoreSettings);
         setHotSlices(res.data.StoreSettings.hotslices);
-        console.log('Set hotSlices');
         setSliceMasters(res.data.StoreSettings.slicemasters);
-        console.log('Set slicmasters');
       })
       .catch((err) => console.error('Fudge!', err));
   }, []);

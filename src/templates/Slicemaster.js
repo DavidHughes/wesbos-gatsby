@@ -4,7 +4,6 @@ import Img from 'gatsby-image';
 import SEO from '../components/SEO';
 
 export default function SlicemasterPage({ data: { slicemaster } }) {
-  console.log(slicemaster);
   return (
     <>
       <SEO title={slicemaster.name} />

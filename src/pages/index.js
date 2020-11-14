@@ -35,7 +35,7 @@ function HotSlices({ hotSlices }) {
 
 export default function HomePage() {
   const { sliceMasters, hotSlices } = useLatestData();
-  console.log({ sliceMasters, hotSlices });
+
   return (
     <>
       <div className="center">
